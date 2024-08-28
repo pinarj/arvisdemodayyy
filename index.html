@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChronoVerse</title>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <link rel="icon" href="images/turunculogo.png" type="image/x-icon">
+
+    <style>
+   
+   body {
+   
+    background: linear-gradient(90deg, #FAD85F, #e99e04);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            position: absolute;
+            top: 5px; /* Logoları ve çizgiyi yukarı taşıyoruz */
+            left: 20px;
+            z-index: 1000;
+            pointer-events: none; /* Logoların altında kalan içerikle etkileşimi önler */
+        }
+
+        .logo-container .logo {
+            width: 100px; /* İlk logonun genişliği */
+            height: 100px; /* İlk logonun yüksekliği */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-color: transparent;
+        }
+
+        .logo-container .logo:last-child {
+            width: 150px; /* Mavi logonun genişliğini büyütüyoruz */
+            height: 150px; /* Mavi logonun yüksekliğini büyütüyoruz */
+            margin-left: 5px; /* Çizgiye daha yakın tutmak için boşluğu azaltıyoruz */
+            margin-top: 57px; /* Turuncu logoyu aşağı kaydırıyoruz */
+        }
+
+        .logo-container .divider {
+            height: 100px;
+            width: 2px;
+            background-color: #000; /* Siyah çizgi */
+            margin-left: 10px;
+        }
+
+        .container {
+            padding-top: 150px; /* Logoların altında kalan içeriği aşağı itmek için */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .text-section, .video-section {
+            flex: 1 1 100%;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .text-section {
+                flex: 1 1 45%;
+                margin-right: 20px;
+            }
+
+            .video-section {
+                flex: 1 1 50%;
+                max-width: 900px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: 60px
+            }
+        }
+
+        .text-section h1 {
+            font-size: 36px;
+            color: #000000d0;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            transition: transform 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .text-section h1:hover {
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        @media (min-width: 768px) {
+            .text-section h1 {
+                font-size: 48px;
+            }
+        }
+
+        .text-section p {
+            font-size: 16px;
+            color: #2d2d24;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+       
+
+        .video-section {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            transition: box-shadow 0.3s ease-in-out;
+            margin-bottom: 85px;
+        }
+
+        @media (max-width: 768px) {
+    .video-section {
+        margin-bottom: 220px; /* Mobil cihazlarda daha fazla boşluk */
+    }
+}
+        
+
+        .video-section:hover {
+            box-shadow: 0px 0px 30px 10px rgba(244, 210, 18, 0.8);
+        }
+
+        .plyr__video-embed {
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            position: relative;
+        }
+
+        .plyr__video-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+        }
+
+        .plyr__control--overlaid {
+            color: #f4d212;
+        }
+
+        .plyr__control--overlaid {
+            background: none !important;
+        }
+
+        .plyr__control--overlaid .plyr__control__circle {
+            background-color: #f4d212 !important;
+            background: none !important;
+        }
+
+        .plyr__control--pressed,
+        .plyr__control--active,
+        .plyr__control--pressed:hover,
+        .plyr__control--active:hover {
+            color: #f4d212 !important;
+        }
+
+        .plyr--full-ui input[type=range] {
+            color: #f4d212;
+        }
+
+        .plyr__progress .plyr__progress__fill {
+            background: #f4d212;
+        }
+
+        .plyr__volume .plyr__volume--display {
+            background: #f4d212;
+        }
+
+        /* Fixed footer for LinkedIn share */
+        .footer-share {
+    background-color: rgb(0, 0, 0);
+    padding: 5px 0; /* Reduced padding */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    margin-top: 15px; /* Added margin to create space between video and footer */
+}
+
+.footer-share a {
+    color: #ffe600;
+    text-decoration: none;
+}
+
+.footer-share p {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+
+.highlight {
+            color: #FFD700; /* Renk kodunu buraya ekleyin */
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7), 0 0 20px rgba(255, 215, 0, 0.7);
+        }
+
+
+        .cta-btn {
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        50% {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+        }
+        100% {
+            transform: scale(1);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+    }
+
+
+    /* Mevcut stillerinizin sonuna ekleyin */
+    body.dark-mode {
+            background: linear-gradient(90deg, #2a2a2a, #1a1a1a);
+            color: white;
+        }
+
+        .text-section.dark-mode h1,
+        .text-section.dark-mode p {
+            color: white;
+        }
+
+        .footer-share.dark-mode {
+            background-color: #1a1a1a;
+            color: white;
+        }
+
+        .footer-share.dark-mode a {
+            color: #ffe600;
+        }
+
+        /* Karanlık Mod Toggle Düğmesi Stilleri */
+        .dark-mode-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: inline-block;
+        }
+
+        .dark-mode-toggle input[type="checkbox"] {
+            display: none;
+        }
+
+        .dark-mode-toggle label {
+            display: block;
+            width: 60px;
+            height: 30px;
+            background-color: #1a1a1a;
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode-toggle .toggle-circle {
+            content: '';
+            width: 24px;
+            height: 24px;
+            background-color: #ffe600;
+            border-radius: 50%;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            transition: left 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode-toggle input[type="checkbox"]:checked + label {
+            background-color: #ffe600;
+        }
+
+        .dark-mode-toggle input[type="checkbox"]:checked + label .toggle-circle {
+            left: 33px;
+            background-color: #1a1a1a;
+        }
+
+
+    </style>
+</head>
+<body>
+
+  <!-- Dark Mode Toggle Button -->
+<div class="dark-mode-toggle">
+    <input type="checkbox" id="darkModeToggle">
+    <label for="darkModeToggle">
+        <div class="toggle-circle"></div>
+    </label>
+</div>
+
+
+    <!-- Logos with divider -->
+    <div class="logo-container">
+        <div id="logoBlack" class="logo" style="background-image: url('images/logoblack.png');"></div>
+        <div class="divider"></div>
+        <div class="logo" style="background-image: url('images/turunculogo.png');"></div>
+    </div>
+    
+
+    <div class="container">
+        <div class="text-section">
+            <h1 class="highlight ">ARVİS: YILDIZLARIN AKADEMİSİ</h1>
+            <p>Created with generative AI technology, this video explores the power of 3D visual and auditory content, showcasing the intersection of technology and art.</p>
+
+        </div>
+        <div class="video-section">
+            <div class="plyr__video-embed" id="player">
+                <iframe
+                    src="https://www.youtube.com/watch?v=k9oXMf3XItc"
+                    
+                    allowfullscreen
+                    allow="autoplay; encrypted-media"
+                    title="YouTube video player"
+                ></iframe>
+            </div>
+        </div>
+    </div>
+
+   <!-- Fixed footer with LinkedIn share -->
+<div class="footer-share">
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Dk9oXMf3XItc&title=Check%20out%20this%20awesome%20video!" target="_blank">
+        If you like this video, <strong>share it on LinkedIn</strong> <span style="font-size: 20px;">🔗</span>
+    </a>
+</div>
+
+       
+
+-
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+    <script>
+        const player = new Plyr('#player');
+    </script>
+    
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        const logoBlack = document.getElementById('logoBlack');
+        const divider = document.querySelector('.divider'); // Çizgiyi seçiyoruz
+    
+        darkModeToggle.addEventListener('change', () => {
+            // Karanlık mod sınıfını body'ye ekleyip kaldırıyoruz
+            body.classList.toggle('dark-mode');
+    
+            // Diğer Öğelerdeki Karanlık Mod Sınıfını Değiştir
+            document.querySelector('.footer-share').classList.toggle('dark-mode');
+            document.querySelector('.text-section').classList.toggle('dark-mode');
+    
+            // Logoyu Karanlık Modda Değiştir
+            if (body.classList.contains('dark-mode')) {
+                logoBlack.style.backgroundImage = "url('images/logosari.png')";
+                divider.style.backgroundColor = "#ffe600"; // Çizgiyi sarıya çevir
+            } else {
+                logoBlack.style.backgroundImage = "url('images/logoblack.png')";
+                divider.style.backgroundColor = "#000000"; // Çizgiyi tekrar siyaha çevir
+            }
+        });
+    </script>
+    
+   
+
+</body>
+</html>
