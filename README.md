@@ -1,5 +1,5 @@
 # Arvis Demo Day Project - Yıldızların Akademisi
-This project was developed as part of the Arvis DeepTech AI Internship Program. Our team created a 3D short film titled "Yıldız Tozları" that integrates visual and auditory generative AI to introduce Arvis Teknoloji. The project aimed to showcase our knowledge of artificial intelligence, including image processing, sound generation, and video editing, all within a creative narrative.
+This project was developed as part of the Arvis DeepTech AI Internship Program. Our team created a 3D short film titled "Yıldızların Akademisi" that integrates visual and auditory generative AI to introduce Arvis Teknoloji. The project aimed to showcase our knowledge of artificial intelligence, including image processing, sound generation, and video editing, all within a creative narrative.
 
 # 🎬 Project Overview
 In this project, we focused on:
